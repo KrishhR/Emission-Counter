@@ -19,13 +19,13 @@ const EmissionTable = (props) => {
 
     // state for managing delete entry modal
     const [deleteModal, setDeleteModal] = useState({ state: false, index: null });
-    
+
     // states for managing backdrop loader
     const [loading, setLoading] = useState(false);
     const startLoading = () => setLoading(true);
     const stopLoading = () => setLoading(false);
-    
-    
+
+
     // states for opening-closing Form modal
     const [openModal, setOpenModal] = useState(false);
     const handleModalChange = () => {
@@ -62,11 +62,11 @@ const EmissionTable = (props) => {
 
         setTimeout(() => {
             stopLoading(); // Stop loading
-            fetchEmissions();
             setOpenSnackbar({ state: true, message: "Item deleted successfully!" });
+            fetchEmissions();
         }, 2000); // Delay of 3 seconds
     }
-
+    
     // handle edit emission entry
     const handleEditEmission = (emission, index) => {
         let temp = { ...emission };
@@ -130,7 +130,7 @@ const EmissionTable = (props) => {
             {/* Edit Emission Form */}
             <EmissionForm openModal={openModal} handleModalChange={handleModalChange} entryToEdit={entryToEdit} />
 
-{/* Snackbar for notification */}
+            {/* Snackbar for notification */}
             <Snackbar
                 open={openSnackbar.state}
                 autoHideDuration={4000}
@@ -148,7 +148,7 @@ const EmissionTable = (props) => {
                 }
             />
 
-{/* Loader */}
+            {/* Loader */}
             <Backdrop
                 sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={loading}
